@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réinitialiser le mot de passe - Style Instagram</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fafafa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .reset-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px; /* Reduced padding */
+            text-align: center;
+            width: 100%;
+            max-width: 300px; /* Reduced max-width */
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-weight: normal;
+            font-size: 18px; /* Reduced font size */
+            color: #262626;
+            margin-bottom: 10px; /* Reduced margin */
+        }
+        .info-text {
+            font-size: 12px; /* Font size remains the same */
+            color: #8e8e8e;
+            margin-bottom: 10px; /* Reduced margin */
+        }
+        input[type="password"] {
+            width: 100%;
+            padding: 8px; /* Reduced padding */
+            margin: 6px 0; /* Reduced margin */
+            border: 1px solid #dbdbdb;
+            border-radius: 5px;
+            font-size: 14px; /* Font size remains the same */
+            transition: border-color 0.3s;
+        }
+        input[type="password"]:focus {
+            border-color: #0095f6;
+            outline: none;
+        }
+        .reset-btn {
+            background-color: #b2dffc;
+            color: white;
+            padding: 8px; /* Reduced padding */
+            border: none;
+            border-radius: 5px;
+            font-size: 14px; /* Font size remains the same */
+            font-weight: bold;
+            margin-top: 8px; /* Reduced margin */
+            cursor: not-allowed;
+            transition: background-color 0.3s;
+        }
+        .active-btn {
+            background-color: #0095f6;
+            cursor: pointer;
+        }
+        .footer {
+            text-align: center;
+            font-size: 12px; /* Font size remains the same */
+            color: #8e8e8e;
+            margin-top: 15px; /* Reduced margin */
+        }
+        .footer a {
+            color: #00376b;
+            text-decoration: none;
+            margin: 0 4px; /* Adjusted margin */
+            font-size: 12px; /* Font size remains the same */
+        }
+        .copyright {
+            text-align: center;
+            font-size: 12px; /* Font size remains the same */
+            color: #8e8e8e;
+            margin-top: 15px; /* Reduced margin */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="reset-container">
+        <h2>Créer un mot de passe fort</h2>
+        <div class="info-text">
+            Votre mot de passe doit contenir au moins 6 caractères et inclure une combinaison de chiffres, de lettres et de caractères spéciaux (comme $@%).
+        </div>
+        <form id="reset-form">
+            <input type="password" id="password" placeholder="Nouveau mot de passe" required>
+            <input type="password" id="confirm-password" placeholder="Nouveau mot de passe, encore une fois" required>
+            <button type="submit" id="reset-btn" class="reset-btn" disabled>Réinitialiser le mot de passe</button>
+        </form>
+    </div>
+
+    <p class="copyright">© 2024 Instagram de Facebook</p>
+
+    <script>
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirm-password');
+        const resetBtn = document.getElementById('reset-btn');
+        const resetForm = document.getElementById('reset-form');
+
+        function validatePasswords() {
+            if (passwordInput.value.length >= 6 && passwordInput.value === confirmPasswordInput.value) {
+                resetBtn.classList.add('active-btn');
+                resetBtn.disabled = false;
+            } else {
+                resetBtn.classList.remove('active-btn');
+                resetBtn.disabled = true;
+            }
+        }
+
+        passwordInput.addEventListener('input', validatePasswords);
+        confirmPasswordInput.addEventListener('input', validatePasswords);
+
+        resetForm.addEventListener('submit', function(event) {
+            if (passwordInput.value !== confirmPasswordInput.value) {
+                event.preventDefault(); // Prevent form submission
+                alert("Les mots de passe ne correspondent pas !"); // Alert the user
+            } else {
+                alert("Mot de passe réinitialisé avec succès !");
+                window.location.href = 'https://instagram.com'; // Redirect to Instagram
+            }
+        });
+    </script>
+
+</body>
+</html>
